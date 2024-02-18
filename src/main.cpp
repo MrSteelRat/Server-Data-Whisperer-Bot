@@ -1,8 +1,9 @@
 ﻿#include <stdio.h>
 #include <tgbot/tgbot.h>
+#include "data_bot.h"
 
 int main() {
-  TgBot::Bot bot("TOKEN");
+  TgBot::Bot bot(TOKEN);
   bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
     bot.getApi().sendMessage(
         message->chat->id, "Hello ! I'am bot.");
@@ -17,8 +18,6 @@ int main() {
                              "Your message is: " + message->text);
   });
 
-
-
   try {
     printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
     TgBot::TgLongPoll longPoll(bot);
@@ -28,6 +27,8 @@ int main() {
     }
   } catch (TgBot::TgException &e) {
     printf("error: %s\n", e.what());
+  } catch (...) {
+    std::cout << "error 2" << "\n";
   }
   return 0;
 }
