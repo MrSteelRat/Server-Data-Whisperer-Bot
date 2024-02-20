@@ -4,20 +4,6 @@
 
 int main() {
   TgBot::Bot bot(TOKEN);
-  bot.getEvents().onCommand("start", [&bot](TgBot::Message::Ptr message) {
-    bot.getApi().sendMessage(
-        message->chat->id, "Hello ! I'am bot.");
-  });
-
-  bot.getEvents().onAnyMessage([&bot](TgBot::Message::Ptr message) {
-    printf("User wrote %s\n", message->text.c_str());
-    if (StringTools::startsWith(message->text, "/start")) {
-      return;
-    }
-    bot.getApi().sendMessage(message->chat->id,
-                             "Your message is: " + message->text);
-  });
-
   try {
     printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
     TgBot::TgLongPoll longPoll(bot);
