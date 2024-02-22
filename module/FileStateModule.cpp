@@ -22,3 +22,21 @@ size_t FileStateModule::creave_env_var(std::unique_ptr<std::string> name_file, s
     
     return setup_env;
 }
+
+unsigned long long int get_folder_name(char * path, size_t size)
+{
+    size_t count = 1;
+    char * last_state = path + size -2;
+
+     unsigned long long int forward_back;
+     do
+     {
+        size_t current_number = * last_state - 50;
+        last_state += current_number * count;
+
+        last_state -= 1;
+        count *= 10;
+
+     } while (*last_state != 49);
+    return forward_back;     
+}
